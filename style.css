@@ -98,7 +98,7 @@ body {
   width: 100%;
 }
 
-/* === Post Cards === */
+/* === Post (Text Only) === */
 .post {
   background: white;
   border-radius: 12px;
@@ -113,24 +113,14 @@ body {
   transform: translateY(-4px);
 }
 
-.post img {
-  width: 100%;
-  max-width: 300px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto 15px auto;
-  border-radius: 8px;
-  border: 1px solid #cbd6f3;
-  background: #f0f6ff;
-}
-
 .post h2 {
-  font-size: 1.5rem;
-  margin: 8px 0;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  color: #1f3b73;
 }
 
 .post p {
   font-size: 1rem;
   color: #566;
+  line-height: 1.6;
 }
