@@ -1,0 +1,101 @@
+/* Basic reset and layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f4f4f4;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  flex-wrap: wrap;
+}
+
+header .left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.menu-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 2;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-bar {
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  min-width: 120px;
+}
+
+.topics a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 1;
+}
+
+.login {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.profile-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+/* Main layout */
+main {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.column {
+  flex: 1;
+  border: 1px solid #ccc;
+  min-height: 100%;
+}
+
+.center-column {
+  flex: 2;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.placeholder-text {
+  color: #aaa;
+  font-style: italic;
+}
