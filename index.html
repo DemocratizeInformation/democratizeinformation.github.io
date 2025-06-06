@@ -5,52 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Democratize Information</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Democratize Information</h1>
+  <header class="top-bar">
+    <div class="left">
+      <div class="menu-icon">☰</div>
+      <div class="site-title">DEMOCRATIZE INFORMATION</div>
+    </div>
+    <input type="text" class="search-box" placeholder="Search" />
+    <nav class="center-tags">
+      <span>World</span>
+      <span>Nation</span>
+      <span>Politics</span>
+      <span>AI</span>
+      <span>Trade</span>
+      <span>Space</span>
+      <span>Humor</span>
+    </nav>
+    <div class="right-group">
+      <a href="#" class="login">Login</a>
+      <div class="profile-icon"></div>
+    </div>
   </header>
 
-  <main class="feed">
-    <div class="post">
-      <img src="images/climate-action.png" alt="Climate Action" />
-      <div class="post-content">
-        <h2>Climate Action Ramps Up</h2>
-        <p>Nations unite for a new global treaty aiming to drastically reduce carbon emissions by 2040...</p>
+  <main class="content-layout">
+    <section class="vertical-feed">
+      <div class="post">
+        <img src="images/post_image_1.png" alt="Moon Colony" />
+        <h2>BREAKING: Moon Colony Announced</h2>
+        <p>NASA and SpaceX confirm plans to launch the first permanent base on the Moon by 2032.</p>
       </div>
-    </div>
-
-    <div class="post">
-      <img src="images/neural-link.png" alt="Neural Link" />
-      <div class="post-content">
-        <h2>Neural Link Breakthrough</h2>
-        <p>Scientists demonstrate direct communication between two human brains using neural implants...</p>
+      <div class="post">
+        <img src="images/post_image_2.png" alt="TikTok Ban" />
+        <h2>TikTok Ban Overturned in Supreme Court</h2>
+        <p>In a 5–4 decision, the U.S. Supreme Court ruled that banning TikTok violated free speech rights.</p>
       </div>
-    </div>
-
-    <div class="post">
-      <img src="images/grassroots-journalism.png" alt="Grassroots Journalism" />
-      <div class="post-content">
-        <h2>Grassroots Journalism Wins</h2>
-        <p>Independent journalists expose corruption in a major urban housing authority — and reforms follow...</p>
+      <div class="post">
+        <img src="images/post_image_3.png" alt="Dog Mayor" />
+        <h2>Dog Mayor Declares National Naptime</h2>
+        <p>Mayor Max, a golden retriever from California, has declared 3 PM daily nap breaks.</p>
       </div>
-    </div>
-
-    <div class="post">
-      <img src="images/solar-skies.png" alt="Solar Skies" />
-      <div class="post-content">
-        <h2>Solar Skies Initiative</h2>
-        <p>A fleet of solar-powered drones to deliver internet to remote regions passes major test flight milestone...</p>
+      <div class="post">
+        <img src="images/post_image_4.png" alt="AI Netflix" />
+        <h2>AI Writes Entire Netflix Series</h2>
+        <p>OpenAI's GPT-5 has written, cast, and storyboarded a new sci-fi thriller hitting Netflix next fall.</p>
       </div>
-    </div>
-
-    <div class="post">
-      <img src="images/open-knowledge.png" alt="Open Knowledge" />
-      <div class="post-content">
-        <h2>Open Knowledge Libraries</h2>
-        <p>Nonprofits worldwide collaborate to make academic research free and accessible to all...</p>
+      <div class="post">
+        <img src="images/post_image_5.png" alt="Lego Tower" />
+        <h2>Giant Lego Tower Topples in NYC</h2>
+        <p>Guinness-record-breaking tower collapses after strong wind; no injuries reported.</p>
       </div>
-    </div>
+    </section>
   </main>
 </body>
 </html>
