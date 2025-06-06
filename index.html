@@ -2,41 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Democratize Information</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="left">
-      <span class="menu-icon">&#9776;</span>
-      <h1>DEMOCRATIZE INFORMATION</h1>
+  <header class="top-bar">
+    <div class="left-group">
+      <div class="menu-icon">☰</div>
+      <div class="site-title">DEMOCRATIZE INFORMATION</div>
+      <input type="text" class="search-box" placeholder="Search" />
     </div>
-    <div class="center">
-      <input type="text" placeholder="search" class="search-bar" />
-      <nav class="topics">
-        <a href="#">World</a>
-        <a href="#">Nation</a>
-        <a href="#">Trump</a>
-        <a href="#">War</a>
-        <a href="#">Trade</a>
-        <a href="#">Legos</a>
-        <a href="#">Badminton</a>
-        <a href="#">Tags</a>
-      </nav>
+    <div class="center-tags">
+      <span>World</span>
+      <span>Nation</span>
+      <span>Trump</span>
+      <span>War</span>
+      <span>Trade</span>
+      <span>Legos</span>
+      <span>Badminton</span>
+      <span>Tags</span>
     </div>
-    <div class="right">
+    <div class="right-group">
       <a href="#" class="login">Login</a>
-      <div class="profile-circle"></div>
+      <div class="profile-icon"></div>
     </div>
   </header>
 
-  <main>
-    <div class="column left-column"></div>
-    <div class="column center-column">
-      <p class="placeholder-text">Main feed will appear here.</p>
-    </div>
-    <div class="column right-column"></div>
+  <main class="content-layout">
+    <aside class="sidebar left"></aside>
+    <section class="feed">
+      <div class="feed-placeholder">Feed content will appear here...</div>
+    </section>
+    <aside class="sidebar right"></aside>
   </main>
 </body>
 </html>
