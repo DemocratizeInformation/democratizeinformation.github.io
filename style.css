@@ -1,142 +1,208 @@
-body {
-  font-family: 'Barlow Condensed', sans-serif;
-  background: linear-gradient(to bottom, #e6f0ff, #f8fbff);
-  color: #1f3b73;
-  margin: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Democratize Information</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Barlow Condensed', sans-serif;
+      background: linear-gradient(to bottom, #e6f0ff, #f8fbff);
+      color: #1f3b73;
+      margin: 0;
+      padding: 0;
+    }
 
-/* === Top Bar === */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to right, #1f3b73, #3d63b3);
-  color: white;
-  padding: 12px 20px;
-  flex-wrap: wrap;
-  gap: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to right, #1f3b73, #3d63b3);
+      color: white;
+      padding: 12px 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
 
-.left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .top-bar .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.menu-icon {
-  font-size: 1.4rem;
-  cursor: pointer;
-}
+    .menu-icon {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
 
-.site-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-}
+    .site-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
 
-.search-box {
-  padding: 6px 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 0.9rem;
-  width: 180px;
-}
+    .search-box {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 0.9rem;
+      width: 180px;
+    }
 
-.center-tags {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: 0.9rem;
-  flex: 1;
-}
+    .center-tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex: 1;
+    }
 
-.center-tags span {
-  background: rgba(255,255,255,0.1);
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-.center-tags span:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-}
+    .center-tags span {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .center-tags span:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
 
-.right-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .right-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.login {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .login {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.profile-icon {
-  width: 24px;
-  height: 24px;
-  border: 2px solid white;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-}
+    .profile-icon {
+      width: 24px;
+      height: 24px;
+      border: 2px solid white;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
-/* === Layout === */
-.content-layout {
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
-}
+    .content-layout {
+      display: flex;
+      justify-content: center;
+      padding: 30px 15px;
+    }
 
-.vertical-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  max-width: 800px;
-  width: 100%;
-}
+    .vertical-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 700px;
+      width: 100%;
+    }
 
-/* === Post Card: Image Left, Text Right === */
-.post {
-  display: flex;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  gap: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s;
-  overflow: hidden;
-  align-items: flex-start;
-}
+    .post {
+      display: flex;
+      align-items: flex-start;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 16px;
+      gap: 16px;
+      transition: transform 0.2s;
+    }
 
-.post:hover {
-  transform: translateY(-4px);
-}
+    .post:hover {
+      transform: translateY(-3px);
+    }
 
-.post img {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border: 1px solid #cbd6f3;
-  background: #f0f6ff;
-}
+    .post img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
 
-.post-text {
-  flex: 1;
-}
+    .post-text {
+      flex: 1;
+    }
 
-.post h2 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-  color: #1f3b73;
-}
+    .post h2 {
+      font-size: 1.2rem;
+      margin: 0 0 8px 0;
+    }
 
-.post p {
-  font-size: 1rem;
-  color: #566;
-  line-height: 1.6;
-}
+    .post p {
+      font-size: 0.95rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="left">
+      <div class="menu-icon">☰</div>
+      <div class="site-title">DEMOCRATIZE INFORMATION</div>
+    </div>
+    <input type="text" class="search-box" placeholder="Search" />
+    <nav class="center-tags">
+      <span>World</span>
+      <span>Politics</span>
+      <span>Science</span>
+      <span>War</span>
+      <span>Entertainment</span>
+    </nav>
+    <div class="right-group">
+      <a href="#" class="login">Login</a>
+      <div class="profile-icon"></div>
+    </div>
+  </header>
+
+  <main class="content-layout">
+    <section class="vertical-feed">
+      <div class="post">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Starbase.jpg/330px-Starbase.jpg" alt="Starbase" />
+        <div class="post-text">
+          <h2>SpaceX to Expand Starbase Operations</h2>
+          <p>Starbase is set to double its launch capacity in 2025 as SpaceX pushes toward full Starship reusability and interplanetary transport goals.</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg" alt="Trump Portrait" />
+        <div class="post-text">
+          <h2>Trump Signs Executive Orders on First Day Back</h2>
+          <p>President Trump returns with immediate orders affecting immigration, federal lands, and energy independence policies.</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Melkkarussell.jpg/1280px-Melkkarussell.jpg" alt="Dairy Automation" />
+        <div class="post-text">
+          <h2>Robots Revolutionize Dairy Farming</h2>
+          <p>Fully automated milking systems now lead in the EU, increasing productivity and improving animal welfare.</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Anti-terrorist_operation_in_eastern_Ukraine_%28War_Ukraine%29_%2827843153986%29.jpg/800px-Anti-terrorist_operation_in_eastern_Ukraine_%28War_Ukraine%29_%2827843153986%29.jpg" alt="Ukraine War" />
+        <div class="post-text">
+          <h2>New Tensions Erupt in Ukraine Conflict</h2>
+          <p>Clashes resume in Eastern Ukraine as ceasefire talks stall. NATO and EU urge restraint as civilians evacuate border towns.</p>
+        </div>
+      </div>
+      <div class="post">
+        <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/MarvelComics1.jpg" alt="Marvel Comic" />
+        <div class="post-text">
+          <h2>Rare Marvel Comic Sells for $1.2M</h2>
+          <p>Marvel Comics #1, published in 1939, becomes one of the most valuable comic books in history after auction this week.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
