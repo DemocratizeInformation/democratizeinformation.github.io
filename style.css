@@ -1,3 +1,4 @@
+/* === Base Styles === */
 body {
   font-family: 'Barlow Condensed', sans-serif;
   background: linear-gradient(to bottom, #e6f0ff, #f8fbff);
@@ -5,61 +6,68 @@ body {
   margin: 0;
 }
 
+/* === Top Bar === */
 .top-bar {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: space-between;
   background: linear-gradient(to right, #1f3b73, #3d63b3);
-  padding: 14px 20px;
   color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 12px 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  gap: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .menu-icon {
-  font-size: 1.6rem;
-  margin-right: 10px;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
 .site-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
-  flex: 1;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
 }
 
 .search-box {
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 5px;
   border: none;
+  font-size: 0.9rem;
   width: 180px;
-  margin: 0 15px;
 }
 
 .center-tags {
   display: flex;
   gap: 12px;
-  flex: 2;
+  flex-wrap: wrap;
   justify-content: center;
   font-size: 0.9rem;
-  flex-wrap: wrap;
+  flex: 1;
 }
 
 .center-tags span {
-  cursor: pointer;
-  padding: 4px 8px;
   background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
   border-radius: 4px;
-  transition: 0.2s;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 .center-tags span:hover {
-  background: #ffffff22;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .right-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .login {
@@ -69,14 +77,14 @@ body {
 }
 
 .profile-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border: 2px solid white;
   border-radius: 50%;
-  background-color: #ffffff33;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Content Layout */
+/* === Main Feed === */
 .content-layout {
   display: flex;
   justify-content: center;
@@ -84,36 +92,43 @@ body {
 }
 
 .feed {
-  max-width: 900px;
-  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
+  max-width: 1000px;
+  width: 100%;
 }
 
+/* === Post Cards === */
 .post {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s;
+  overflow: hidden;
+  text-align: left;
 }
+
 .post:hover {
   transform: translateY(-4px);
 }
 
 .post img {
   width: 100%;
+  height: auto;
   border-radius: 8px;
   margin-bottom: 10px;
+  border: 1px solid #cbd6f3;
+  background: #f0f6ff;
 }
 
 .post h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 8px 0;
 }
 
 .post p {
+  font-size: 0.9rem;
   color: #566;
-  font-size: 0.95rem;
 }
