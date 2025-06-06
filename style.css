@@ -1,65 +1,136 @@
 body {
+  font-family: 'Barlow Condensed', sans-serif;
+  background: linear-gradient(to bottom, #e6f0ff, #f8fbff);
+  color: #1f3b73;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f7;
-  color: #333;
 }
 
-header {
-  background-color: #212121;
-  color: #fff;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 1.5rem;
+/* === Top Bar === */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #1f3b73, #3d63b3);
+  color: white;
+  padding: 12px 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.site-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+.search-box {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.9rem;
+  width: 180px;
+}
+
+.center-tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.center-tags span {
+  background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.center-tags span:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login {
+  color: white;
+  text-decoration: none;
   font-weight: bold;
 }
 
-.feed {
-  max-width: 850px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.profile-icon {
+  width: 24px;
+  height: 24px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.post {
+/* === Main Layout === */
+.content-layout {
   display: flex;
-  background-color: #fff;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.vertical-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* === Post Cards === */
+.post {
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
   overflow: hidden;
-  align-items: center;
-  padding: 1rem;
-  transition: transform 0.2s ease;
+  text-align: left;
 }
 
 .post:hover {
-  transform: scale(1.01);
+  transform: translateY(-4px);
 }
 
 .post img {
-  width: 140px;
-  height: 140px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  display: block;
+  margin: 0 auto 15px auto;
   border-radius: 8px;
-  margin-right: 1.2rem;
-  flex-shrink: 0;
+  border: 1px solid #cbd6f3;
+  background: #f0f6ff;
 }
 
-.post-content h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #111;
+.post h2 {
+  font-size: 1.5rem;
+  margin: 8px 0;
 }
 
-.post-content p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #555;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+.post p {
+  font-size: 1rem;
+  color: #566;
 }
