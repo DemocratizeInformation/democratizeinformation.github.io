@@ -3,33 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Post Feed</title>
+  <title>Democratize Information</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background-color: #f5f7fa;
-      color: #333;
+      background-color: #e6f0fa;
+      color: #1a1a1a;
     }
 
     .topbar {
-      background-color: #0077cc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #003366;
       color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5rem;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-weight: bold;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    .left-section .menu-icon {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .center-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .center-section input[type="text"] {
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #003366;
+      box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+    }
+
+    .tag {
+      background-color: #00aaff;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .tag:hover {
+      background-color: #008fcc;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .login {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .user-icon {
+      width: 24px;
+      height: 24px;
+      border: 2px solid white;
+      border-radius: 50%;
+      background-color: #00aaff;
+    }
+
+    .layout {
+      display: flex;
+      height: calc(100vh - 58px);
+    }
+
+    .column {
+      flex: 1;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      padding: 15px;
+      overflow-y: auto;
     }
 
     .feed {
       display: flex;
       flex-direction: column;
-      padding: 20px;
       gap: 15px;
     }
 
@@ -38,7 +119,7 @@
       align-items: center;
       background-color: white;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       padding: 15px;
       gap: 15px;
     }
@@ -57,62 +138,87 @@
     }
 
     .post-text h2 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
       margin-bottom: 5px;
+      color: #003366;
     }
 
     .post-text p {
-      font-size: 0.95rem;
-      color: #666;
+      font-size: 0.9rem;
+      color: #555;
     }
   </style>
 </head>
 <body>
   <div class="topbar">
-    <h1>Democratize Information</h1>
+    <div class="left-section">
+      <div class="menu-icon">☰</div>
+      <div>DEMOCRATIZE INFORMATION</div>
+    </div>
+    <div class="center-section">
+      <input type="text" placeholder="search" />
+      <span class="tag">world</span>
+      <span class="tag">nation</span>
+      <span class="tag">trump</span>
+      <span class="tag">war</span>
+      <span class="tag">trade</span>
+      <span class="tag">legos</span>
+      <span class="tag">badminton</span>
+      <span class="tag">tags</span>
+    </div>
+    <div class="right-section">
+      <span class="login">Login</span>
+      <div class="user-icon"></div>
+    </div>
   </div>
 
-  <div class="feed">
-    <div class="post">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Starbase.jpg" alt="Post Image">
-      <div class="post-text">
-        <h2>Starbase Launch</h2>
-        <p>SpaceX prepares another ambitious launch to expand Starlink...</p>
-      </div>
-    </div>
+  <div class="layout">
+    <div class="column"></div> <!-- Left column -->
+    <div class="column">
+      <div class="feed">
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Starbase.jpg" alt="Post Image">
+          <div class="post-text">
+            <h2>Starbase Launch</h2>
+            <p>SpaceX prepares another ambitious launch to expand Starlink...</p>
+          </div>
+        </div>
 
-    <div class="post">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Donald_Trump_official_portrait.jpg" alt="Post Image">
-      <div class="post-text">
-        <h2>2025 Presidential Portrait</h2>
-        <p>New official portrait of President Donald J. Trump revealed...</p>
-      </div>
-    </div>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Donald_Trump_official_portrait.jpg" alt="Post Image">
+          <div class="post-text">
+            <h2>2025 Presidential Portrait</h2>
+            <p>New official portrait of President Donald J. Trump revealed...</p>
+          </div>
+        </div>
 
-    <div class="post">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Melkkarussell.jpg" alt="Post Image">
-      <div class="post-text">
-        <h2>Modern Dairy Automation</h2>
-        <p>Melkkarussell system revolutionizes dairy efficiency...</p>
-      </div>
-    </div>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Melkkarussell.jpg" alt="Post Image">
+          <div class="post-text">
+            <h2>Modern Dairy Automation</h2>
+            <p>Melkkarussell system revolutionizes dairy efficiency...</p>
+          </div>
+        </div>
 
-    <div class="post">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_map_of_Ukraine.png" alt="Post Image">
-      <div class="post-text">
-        <h2>Eastern Ukraine Conflict</h2>
-        <p>Ongoing tensions continue to shape the region’s geopolitical climate...</p>
-      </div>
-    </div>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_map_of_Ukraine.png" alt="Post Image">
+          <div class="post-text">
+            <h2>Eastern Ukraine Conflict</h2>
+            <p>Ongoing tensions continue to shape the region’s geopolitical climate...</p>
+          </div>
+        </div>
 
-    <div class="post">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Climate_March_2017_Washington_DC.jpg" alt="Post Image">
-      <div class="post-text">
-        <h2>Climate Innovation</h2>
-        <p>New initiatives lead the fight against climate change globally...</p>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Climate_March_2017_Washington_DC.jpg" alt="Post Image">
+          <div class="post-text">
+            <h2>Climate Innovation</h2>
+            <p>New initiatives lead the fight against climate change globally...</p>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="column"></div> <!-- Right column -->
   </div>
 </body>
 </html>
