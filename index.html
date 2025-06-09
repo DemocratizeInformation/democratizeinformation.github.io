@@ -100,10 +100,17 @@
       height: calc(100vh - 58px);
     }
 
-    .column {
-      flex: 1;
+    .left-column,
+    .right-column {
+      width: 25%;
       border-left: 1px solid #ccc;
       border-right: 1px solid #ccc;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .center-column {
+      width: 50%;
       padding: 15px;
       overflow-y: auto;
     }
@@ -148,6 +155,20 @@
       font-size: 0.9rem;
       color: #555;
     }
+
+    @media (max-width: 800px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .left-column, .right-column {
+        display: none;
+      }
+
+      .center-column {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -174,8 +195,9 @@
   </div>
 
   <div class="layout">
-    <div class="column"></div> <!-- Left column -->
-    <div class="column">
+    <div class="left-column"></div>
+
+    <div class="center-column">
       <div class="feed">
         <div class="post">
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Starbase.jpg" alt="Post Image">
@@ -186,10 +208,10 @@
         </div>
 
         <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Donald_Trump_official_portrait.jpg" alt="Post Image">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg" alt="Post Image">
           <div class="post-text">
-            <h2>2025 Presidential Portrait</h2>
-            <p>New official portrait of President Donald J. Trump revealed...</p>
+            <h2>Presidential Portrait</h2>
+            <p>New official portrait highlights former leadership legacy...</p>
           </div>
         </div>
 
@@ -210,7 +232,7 @@
         </div>
 
         <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Climate_March_2017_Washington_DC.jpg" alt="Post Image">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Greta_Thunberg_Climate_Strike.jpg" alt="Post Image">
           <div class="post-text">
             <h2>Climate Innovation</h2>
             <p>New initiatives lead the fight against climate change globally...</p>
@@ -218,7 +240,8 @@
         </div>
       </div>
     </div>
-    <div class="column"></div> <!-- Right column -->
+
+    <div class="right-column"></div>
   </div>
 </body>
 </html>
