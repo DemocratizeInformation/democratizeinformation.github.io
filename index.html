@@ -13,8 +13,8 @@
     }
 
     body {
-      background-color: #e6f0fa;
-      color: #1a1a1a;
+      background-color: #f4f6f9;
+      color: #222;
     }
 
     .topbar {
@@ -111,49 +111,58 @@
 
     .center-column {
       width: 50%;
-      padding: 15px;
+      padding: 25px;
       overflow-y: auto;
     }
 
+    /* Feed styling from sketch */
     .feed {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 30px;
     }
 
     .post {
       display: flex;
-      align-items: center;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      padding: 15px;
-      gap: 15px;
+      gap: 20px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .post img {
       width: 100px;
       height: 100px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 4px;
     }
 
-    .post-text {
+    .post-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .post-text h2 {
+    .post-content h2 {
       font-size: 1.1rem;
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       color: #003366;
     }
 
-    .post-text p {
-      font-size: 0.9rem;
-      color: #555;
+    .post-content p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #444;
+    }
+
+    .text-only {
+      flex-direction: column;
+    }
+
+    .text-only .post-content {
+      padding-left: 0;
     }
 
     @media (max-width: 800px) {
@@ -199,43 +208,29 @@
 
     <div class="center-column">
       <div class="feed">
+        <!-- Image + Text Post -->
         <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Starbase.jpg" alt="Post Image">
-          <div class="post-text">
+          <img src="https://via.placeholder.com/100x100.png?text=Story+Photo" alt="Story">
+          <div class="post-content">
+            <h2>Title lorem ipsum or whatever</h2>
+            <p>This is the text associated with the post. Applies to all kinds of media. If it's a story, there will be more text. Say "good joke!" if you have the capacity to read what is on this paper.</p>
+          </div>
+        </div>
+
+        <!-- Text-only Post -->
+        <div class="post text-only">
+          <div class="post-content">
+            <h2>Title lorem ipsum or whatever</h2>
+            <p>(This is the text associated with the post. Applies to all kinds of media. If it's a story, there will be more text. Say "good joke!" if you have the capacity to read what is on this paper.) this is a text-only one.</p>
+          </div>
+        </div>
+
+        <!-- Another Post with Image -->
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Starbase.jpg" alt="Starbase">
+          <div class="post-content">
             <h2>Starbase Launch</h2>
-            <p>SpaceX prepares another ambitious launch to expand Starlink...</p>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg" alt="Post Image">
-          <div class="post-text">
-            <h2>Presidential Portrait</h2>
-            <p>New official portrait highlights former leadership legacy...</p>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Melkkarussell.jpg" alt="Post Image">
-          <div class="post-text">
-            <h2>Modern Dairy Automation</h2>
-            <p>Melkkarussell system revolutionizes dairy efficiency...</p>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Flag_map_of_Ukraine.png" alt="Post Image">
-          <div class="post-text">
-            <h2>Eastern Ukraine Conflict</h2>
-            <p>Ongoing tensions continue to shape the region’s geopolitical climate...</p>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Greta_Thunberg_Climate_Strike.jpg" alt="Post Image">
-          <div class="post-text">
-            <h2>Climate Innovation</h2>
-            <p>New initiatives lead the fight against climate change globally...</p>
+            <p>SpaceX prepares another ambitious launch to expand Starlink to new corners of the globe...</p>
           </div>
         </div>
       </div>
