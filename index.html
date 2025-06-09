@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Democratize Information</title>
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -24,8 +23,9 @@
       background-color: #000;
       color: white;
       padding: 12px 24px;
-      font-size: 0.95rem;
       border-bottom: 1px solid #333;
+      position: relative;
+      z-index: 10;
     }
 
     .left-section {
@@ -34,8 +34,6 @@
       gap: 10px;
       font-weight: 600;
       font-size: 1.2rem;
-      letter-spacing: 0.5px;
-      position: relative;
     }
 
     .menu-icon {
@@ -52,7 +50,7 @@
       flex-wrap: wrap;
     }
 
-    .center-section input[type="text"] {
+    .center-section input {
       padding: 5px 10px;
       font-size: 0.9rem;
       border: none;
@@ -85,16 +83,27 @@
     .right-section {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px;
     }
 
-    .login, .donate {
+    .login {
       font-weight: bold;
       cursor: pointer;
-      background: none;
+    }
+
+    .donate {
+      padding: 8px 16px;
+      font-weight: bold;
+      background-color: #ffaa00;
+      color: #000;
       border: none;
-      color: white;
-      font-size: 0.95rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .donate:hover {
+      background-color: #ffbf33;
     }
 
     .user-icon {
@@ -110,8 +119,7 @@
       height: calc(100vh - 58px);
     }
 
-    .left-column,
-    .right-column {
+    .left-column, .right-column {
       width: 25%;
       border-left: 1px solid #222;
       border-right: 1px solid #222;
@@ -135,7 +143,7 @@
       display: flex;
       align-items: flex-start;
       gap: 15px;
-      padding: 16px 20px;
+      padding: 12px 20px;
       border-bottom: 1px solid #333;
     }
 
@@ -153,7 +161,7 @@
     .post-content h2 {
       font-size: 1rem;
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: white;
     }
 
@@ -169,13 +177,13 @@
 
     .settings-panel {
       position: fixed;
-      top: 0;
+      top: 58px; /* directly below topbar */
       left: 20px;
       width: 200px;
       height: 66vh;
       background-color: rgba(0, 0, 0, 0.7);
-      color: white;
       padding: 20px;
+      color: white;
       z-index: 1000;
       border-radius: 6px;
       backdrop-filter: blur(4px);
@@ -188,46 +196,33 @@
     }
 
     @media (max-width: 800px) {
-      .layout {
-        flex-direction: column;
-      }
-
-      .left-column, .right-column {
-        display: none;
-      }
-
-      .center-column {
-        width: 100%;
-      }
-
-      .settings-panel {
-        left: 10px;
-        width: calc(100% - 20px);
-      }
+      .layout { flex-direction: column; }
+      .left-column, .right-column { display: none; }
+      .center-column { width: 100%; }
+      .settings-panel { left: 10px; width: calc(100% - 20px); }
     }
   </style>
 </head>
 <body>
+
   <div class="topbar">
     <div class="left-section" id="menu-area">
       <div class="menu-icon" id="menu-icon">☰</div>
       <div>Democratize Information</div>
       <div class="settings-panel" id="settings-panel">
         <h3>Settings</h3>
-        <p>Coming soon...</p>
+        <p>Placeholder content</p>
       </div>
     </div>
 
     <div class="center-section">
       <input type="text" placeholder="search" />
       <span class="tag">world</span>
-      <span class="tag">nation</span>
-      <span class="tag">trump</span>
-      <span class="tag">war</span>
-      <span class="tag">trade</span>
-      <span class="tag">legos</span>
-      <span class="tag">badminton</span>
-      <span class="tag">tags</span>
+      <span class="tag">nature</span>
+      <span class="tag">science</span>
+      <span class="tag">history</span>
+      <span class="tag">tech</span>
+      <span class="tag">culture</span>
     </div>
 
     <div class="right-section">
@@ -243,17 +238,37 @@
     <div class="center-column">
       <div class="feed">
         <div class="post">
-          <img src="https://via.placeholder.com/80x80.png?text=Story+Photo" alt="Story">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Albert_Einstein_Head.jpg/80px-Albert_Einstein_Head.jpg" alt="Einstein">
           <div class="post-content">
-            <h2>Title lorem ipsum or whatever</h2>
-            <p>This is the text associated with the post. Applies to all kinds of media. If it's a story, there will be more text.</p>
+            <h2>Albert Einstein</h2>
+            <p>A German-born theoretical physicist who developed the theory of relativity.</p>
           </div>
         </div>
-
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/1st_Satellite_Pup_in_cage.jpg/80px-1st_Satellite_Pup_in_cage.jpg" alt="Laika">
+          <div class="post-content">
+            <h2>Laika the Space Dog</h2>
+            <p>The first animal to orbit Earth, aboard Sputnik 2 in 1957.</p>
+          </div>
+        </div>
         <div class="post text-only">
           <div class="post-content">
-            <h2>Title lorem ipsum or whatever</h2>
-            <p>This is a text-only one. Say "good joke!" if you read this.</p>
+            <h2>Bitcoin Launch</h2>
+            <p>Released in 2009 by the pseudonymous Satoshi Nakamoto, revolutionizing digital currency.</p>
+          </div>
+        </div>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Stonehenge2007_07_30.jpg/80px-Stonehenge2007_07_30.jpg" alt="Stonehenge">
+          <div class="post-content">
+            <h2>Stonehenge</h2>
+            <p>Prehistoric monument in Wiltshire, England, dating to some time between 3000 BC and 2000 BC.</p>
+          </div>
+        </div>
+        <div class="post">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/80px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" alt="Mona Lisa">
+          <div class="post-content">
+            <h2>Mona Lisa</h2>
+            <p>A portrait painted by Leonardo da Vinci in the early 16th century.</p>
           </div>
         </div>
       </div>
@@ -265,14 +280,9 @@
   <script>
     const panel = document.getElementById("settings-panel");
     const menuArea = document.getElementById("menu-area");
-
-    menuArea.addEventListener("mouseenter", () => {
-      panel.classList.add("show");
-    });
-
-    menuArea.addEventListener("mouseleave", () => {
-      panel.classList.remove("show");
-    });
+    menuArea.addEventListener("mouseenter", () => panel.classList.add("show"));
+    menuArea.addEventListener("mouseleave", () => panel.classList.remove("show"));
   </script>
+
 </body>
 </html>
