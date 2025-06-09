@@ -15,9 +15,8 @@
     body {
       background-color: #0a0a0a;
       color: #e6e6e6;
-      background-image: 
-        radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, transparent 2px);
+      background-image: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%),
+                        repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, transparent 2px);
       line-height: 1.6;
       scroll-behavior: smooth;
     }
@@ -168,41 +167,74 @@
 
     .post {
       display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 24px 0;
+      flex-direction: column;
+      padding: 24px;
       border-bottom: 1px solid #333;
-      transition: background 0.2s ease;
+      background-color: rgba(255,255,255,0.01);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .post:hover {
-      background-color: rgba(255,255,255,0.02);
+      background-color: rgba(255,255,255,0.03);
+      transform: scale(1.01);
     }
 
-    .post img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
     }
 
-    .post-content {
-      flex: 1;
+    .post-meta {
+      font-size: 0.8rem;
+      color: #999;
     }
 
-    .post-content h2 {
-      font-size: 1.15rem;
-      color: white;
-      margin-bottom: 6px;
+    .post-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 8px;
     }
 
-    .post-content p {
-      font-size: 0.9rem;
-      color: #bbb;
+    .post-body {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 10px;
     }
 
-    .text-only {
-      flex-direction: column;
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .votes {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vote-btn {
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+
+    .vote-btn:hover {
+      color: #ffaa00;
+    }
+
+    .flair {
+      background-color: #222;
+      color: #ffa;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      border-radius: 4px;
     }
 
     @media (max-width: 900px) {
@@ -213,6 +245,62 @@
   </style>
 </head>
 <body>
-<!-- Remaining HTML structure unchanged -->
+  <div class="topbar">
+    <div class="left-section">
+      <div class="menu-icon">☰</div>
+      <div>Democratize Info</div>
+    </div>
+    <div class="center-section">
+      <input type="text" placeholder="Search..." />
+      <span class="tag">world</span>
+      <span class="tag">tech</span>
+      <span class="tag">science</span>
+      <span class="tag">culture</span>
+    </div>
+    <div class="right-section">
+      <button class="donate">Donate</button>
+      <button class="login">Login</button>
+      <div class="user-icon"></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left-column"></div>
+    <div class="center-column">
+      <div class="feed">
+        <div class="post">
+          <div class="post-header">
+            <div class="post-meta">u/atlas_rise • 2h ago • <span class="flair">News</span></div>
+          </div>
+          <div class="post-title">Mars Colony Landed Successfully</div>
+          <div class="post-body">The first human crew has landed on Mars. Elon and NASA just made history.</div>
+          <div class="post-footer">
+            <div class="votes">
+              <span class="vote-btn">⬆</span>
+              <span>1.2k</span>
+              <span class="vote-btn">⬇</span>
+            </div>
+            <div class="post-meta">42 comments</div>
+          </div>
+        </div>
+        <div class="post">
+          <div class="post-header">
+            <div class="post-meta">u/data_dreamer • 4h ago • <span class="flair">Opinion</span></div>
+          </div>
+          <div class="post-title">Prompt Engineering Will Be a Life Skill</div>
+          <div class="post-body">Just like writing and math, teaching people how to speak with machines will be foundational.</div>
+          <div class="post-footer">
+            <div class="votes">
+              <span class="vote-btn">⬆</span>
+              <span>980</span>
+              <span class="vote-btn">⬇</span>
+            </div>
+            <div class="post-meta">89 comments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-column"></div>
+  </div>
 </body>
 </html>
