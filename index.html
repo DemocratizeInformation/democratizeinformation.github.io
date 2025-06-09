@@ -9,7 +9,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
     }
 
     body {
@@ -32,9 +32,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 1.1rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
     }
 
     .left-section .menu-icon {
@@ -46,8 +46,8 @@
       flex: 1;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 0 20px;
+      gap: 14px;
+      margin: 0 30px;
       flex-wrap: wrap;
     }
 
@@ -62,44 +62,40 @@
     }
 
     .tag {
-      background-color: #274c77;
-      color: #ffffff;
-      padding: 4px 10px;
-      border-radius: 12px;
+      color: #c9d6e5;
       font-weight: 500;
-      font-size: 0.85rem;
-      cursor: pointer;
+      font-size: 0.88rem;
       position: relative;
+      padding-right: 8px;
+      margin-right: 8px;
     }
 
     .tag::after {
-      content: '';
+      content: '|';
       position: absolute;
-      right: -6px;
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
-      width: 1px;
-      height: 16px;
-      background-color: #7aa6d6;
+      color: #556a85;
     }
 
     .tag:last-of-type::after {
       display: none;
     }
 
-    .tag:hover {
-      background-color: #3e6fa9;
-    }
-
     .right-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
 
-    .login {
+    .login, .donate {
       font-weight: bold;
       cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 0.95rem;
     }
 
     .user-icon {
@@ -198,7 +194,7 @@
   <div class="topbar">
     <div class="left-section">
       <div class="menu-icon">☰</div>
-      <div>DEMOCRATIZE INFORMATION</div>
+      <div>Democratize Information</div>
     </div>
     <div class="center-section">
       <input type="text" placeholder="search" />
@@ -212,7 +208,8 @@
       <span class="tag">tags</span>
     </div>
     <div class="right-section">
-      <span class="login">Login</span>
+      <button class="donate">Donate</button>
+      <button class="login">Login</button>
       <div class="user-icon"></div>
     </div>
   </div>
