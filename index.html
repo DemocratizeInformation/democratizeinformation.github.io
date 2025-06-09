@@ -11,7 +11,6 @@
       padding: 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
     }
-
     body {
       background-color: #0a0a0a;
       color: #e6e6e6;
@@ -20,12 +19,10 @@
       line-height: 1.6;
       scroll-behavior: smooth;
     }
-
     a {
       text-decoration: none;
       color: inherit;
     }
-
     .topbar {
       display: flex;
       align-items: center;
@@ -40,7 +37,6 @@
       top: 0;
       z-index: 100;
     }
-
     .left-section {
       display: flex;
       align-items: center;
@@ -50,13 +46,11 @@
       letter-spacing: 0.6px;
       text-transform: uppercase;
     }
-
     .menu-icon {
       font-size: 1.8rem;
       cursor: pointer;
       user-select: none;
     }
-
     .center-section {
       flex: 1;
       display: flex;
@@ -65,7 +59,6 @@
       margin: 0 50px;
       flex-wrap: wrap;
     }
-
     .center-section input {
       padding: 8px 14px;
       font-size: 1rem;
@@ -75,7 +68,6 @@
       color: white;
       min-width: 180px;
     }
-
     .tag {
       color: #ccc;
       font-size: 0.95rem;
@@ -84,7 +76,6 @@
       position: relative;
       letter-spacing: 0.3px;
     }
-
     .tag::after {
       content: '|';
       position: absolute;
@@ -93,17 +84,14 @@
       transform: translateY(-50%);
       color: #444;
     }
-
     .tag:last-of-type::after {
       display: none;
     }
-
     .right-section {
       display: flex;
       align-items: center;
       gap: 26px;
     }
-
     .donate {
       padding: 10px 22px;
       font-weight: bold;
@@ -116,11 +104,9 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       transition: background-color 0.2s ease;
     }
-
     .donate:hover {
       background-color: #ffbf33;
     }
-
     .login {
       font-weight: bold;
       background: none;
@@ -129,7 +115,6 @@
       cursor: pointer;
       font-size: 0.95rem;
     }
-
     .user-icon {
       width: 28px;
       height: 28px;
@@ -137,13 +122,11 @@
       border-radius: 50%;
       background-color: #444;
     }
-
     .layout {
       display: flex;
       height: calc(100vh - 64px);
       border-top: 1px solid #1c1c1c;
     }
-
     .left-column, .right-column {
       width: 25%;
       background: linear-gradient(to bottom, #141414, #0f0f0f);
@@ -151,20 +134,17 @@
       padding: 24px;
       overflow-y: auto;
     }
-
     .center-column {
       width: 50%;
       overflow-y: auto;
       background-color: #121212;
       background-image: repeating-linear-gradient(180deg, rgba(255,255,255,0.01) 0, transparent 3px);
     }
-
     .feed {
       display: flex;
       flex-direction: column;
       padding: 32px;
     }
-
     .post {
       display: flex;
       flex-direction: column;
@@ -175,60 +155,50 @@
       margin-bottom: 16px;
       transition: background 0.2s ease, transform 0.2s ease;
     }
-
     .post:hover {
       background-color: rgba(255,255,255,0.03);
       transform: scale(1.01);
     }
-
     .post-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
-
     .post-meta {
       font-size: 0.8rem;
       color: #999;
     }
-
     .post-title {
       font-size: 1.2rem;
       font-weight: bold;
       color: #fff;
       margin-bottom: 8px;
     }
-
     .post-body {
       font-size: 0.95rem;
       color: #ccc;
       margin-bottom: 10px;
     }
-
     .post-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .votes {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
     .vote-btn {
       cursor: pointer;
       font-size: 1.2rem;
       color: #aaa;
       transition: color 0.2s;
     }
-
     .vote-btn:hover {
       color: #ffaa00;
     }
-
     .flair {
       background-color: #222;
       color: #ffa;
@@ -236,7 +206,6 @@
       font-size: 0.75rem;
       border-radius: 4px;
     }
-
     @media (max-width: 900px) {
       .layout { flex-direction: column; }
       .left-column, .right-column { display: none; }
@@ -263,7 +232,6 @@
       <div class="user-icon"></div>
     </div>
   </div>
-
   <div class="layout">
     <div class="left-column"></div>
     <div class="center-column">
