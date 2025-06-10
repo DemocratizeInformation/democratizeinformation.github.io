@@ -1,421 +1,507 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Democratize Information</title>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
+    :root {
+      --bg: #000000;
+      --text: #e1e1e1;
+      --primary: #1877f2;  /* Facebook/Twitter style blue accent */
+      --secondary: #121212;
+      --hover: rgba(24,119,242,0.1);
+      --light-bg: #ffffff;
+      --light-text: #000000;
+      --light-secondary: #f0f0f0;
+      --transition: 0.3s ease;
+    }
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    body {
-      background-color: #0a0a0a;
-      color: #e6e6e6;
-      background-image: radial-gradient(circle at center, rgba(255,255,255,0.02) 0%, transparent 70%),
-                        repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, transparent 2px);
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color var(--transition), color var(--transition);
       line-height: 1.6;
-      scroll-behavior: smooth;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
+    body.light-mode {
+      background-color: var(--light-bg);
+      color: var(--light-text);
     }
+    a { color: inherit; text-decoration: none; }
     .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, #0c0c0c, #1c1c1c);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 6px);
-      color: white;
-      padding: 20px 36px;
-      border-bottom: 1px solid #222;
-      box-shadow: inset 0 -1px 0 #1f1f1f, 0 4px 10px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #0c0c0c, #1c1c1c);
+      transition: background var(--transition);
       z-index: 100;
     }
-    .left-section {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-weight: 700;
-      font-size: 1.6rem;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
+    .topbar.light-mode {
+      background: var(--light-secondary);
     }
-    .menu-icon {
-      font-size: 1.8rem;
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-    }
+    .menu-icon { font-size: 1.8rem; cursor: pointer; user-select: none; }
+    /* Sidebar */
     .sidebar {
       position: fixed;
-      top: 72px;
-      left: 24px;
+      top: 64px;
+      left: calc(25% + 24px);
       width: 220px;
       height: 66vh;
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      background-color: rgba(0,0,0,0.7);
       backdrop-filter: blur(4px);
-      display: none;
+      border-radius: 8px;
+      display: flex;
       flex-direction: column;
       gap: 12px;
+      padding: 16px;
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      pointer-events: none;
       z-index: 99;
     }
-    .menu-icon:hover + .sidebar,
-    .sidebar:hover {
-      display: flex;
+    .sidebar.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
-    .center-section {
-      flex: 1;
+    .sidebar label { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    /* Search and filters */
+    .center-controls {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin: 0 50px;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    .center-section input {
-      padding: 8px 14px;
-      font-size: 1rem;
+    .center-controls input, .center-controls select {
+      padding: 8px 12px;
       border: none;
       border-radius: 6px;
-      background-color: #1f1f1f;
-      color: white;
-      min-width: 180px;
+      background-color: var(--secondary);
+      color: var(--text);
+      transition: background var(--transition);
     }
+    .center-controls select { cursor: pointer; }
     .tag {
       padding: 6px 10px;
-      background: #1f1f1f;
       border-radius: 6px;
-      cursor: pointer;
-      user-select: none;
+      background: var(--secondary);
       color: #ccc;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
     }
     .tag.active {
-      background: #ffaa00;
+      background: var(--primary);
       color: #000;
       font-weight: bold;
     }
-    .right-section {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-    }
-    .donate {
-      padding: 10px 22px;
-      font-weight: bold;
-      font-size: 0.95rem;
-      background-color: #ffaa00;
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-      transition: background-color 0.2s ease;
-    }
-    .donate:hover {
-      background-color: #ffbf33;
-    }
-    .login {
-      font-weight: bold;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-    .user-icon {
-      width: 28px;
-      height: 28px;
-      border: 2px solid white;
-      border-radius: 50%;
-      background-color: #444;
-    }
-    .layout {
-      display: flex;
-      height: calc(100vh - 64px);
-      border-top: 1px solid #1c1c1c;
-    }
+    /* Layout */
+    .layout { display: flex; height: calc(100vh - 64px); }
     .left-column, .right-column {
       width: 25%;
-      background: linear-gradient(to bottom, #141414, #0f0f0f);
-      background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, transparent 2px);
-      padding: 24px;
+      background: linear-gradient(to bottom, #202024, #18181c);
       overflow-y: auto;
+      padding: 24px;
     }
     .center-column {
       width: 50%;
+      background-color: #18181c;
       overflow-y: auto;
-      background-color: #121212;
-      background-image: repeating-linear-gradient(180deg, rgba(255,255,255,0.01) 0, transparent 3px);
-    }
-    .feed {
-      display: flex;
-      flex-direction: column;
       padding: 32px;
     }
+    /* Posts */
+    .feed { display: flex; flex-direction: column; gap: 16px; }
     .post {
       display: flex;
-      flex-direction: column;
-      padding: 24px;
-      border-bottom: 1px solid #333;
+      gap: 4px;
       background-color: rgba(255,255,255,0.01);
       border-radius: 8px;
-      margin-bottom: 16px;
-      transition: background 0.2s ease, transform 0.2s ease;
+      padding: 4px;
+      transition: background var(--transition), transform var(--transition);
     }
     .post:hover {
-      background-color: rgba(255,255,255,0.03);
-      transform: scale(1.01);
+      background-color: var(--hover);
+      transform: scale(1.015);
     }
-    .modal-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
+    .post img {
+      width: 60px;
+      height: 60px;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    .post-content { display: flex; flex-direction: column; gap: 8px; }
+    .post-title { font-weight: bold; font-size: 1.1rem; }
+    .post-body { font-size: 0.95rem; color: #ccc; }
+    .post-footer {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      z-index: 200;
+      margin-top: auto;
     }
+    .votes { display: flex; align-items: center; gap: 6px; }
+    .vote-btn { cursor: pointer; user-select: none; }
+    /* Scroll to top */
+    #scroll-top {
+      position: fixed; bottom: 24px; right: 24px; padding: 12px;
+      border: none; border-radius: 50%; cursor: pointer;
+      display: none; font-size: 1.4rem; background: var(--primary); color: #000;
+      transition: background var(--transition);
+    }
+    #scroll-top:hover { background: #ffa733; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .left-column, .right-column { display: none; }
+      .center-column { width: 100%; }
+      .sidebar { left: 16px; width: calc(100% - 32px); }
+    }
+    /* Modal */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none; align-items: center; justify-content: center;
+      z-index: 200; opacity: 0; transition: opacity var(--transition);
+    }
+    .modal-bg.open { display: flex; opacity: 1; }
     .modal {
-      background: #202020;
-      padding: 24px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 500px;
+      background: #202020; padding: 24px; border-radius: 8px;
+      width: 90%; max-width: 500px; transform: translateY(-20px);
+      opacity: 0; transition: transform var(--transition), opacity var(--transition);
     }
-    .modal input, .modal textarea, .modal select {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      background: #2a2a2a;
-      color: #eee;
+    .modal.open { transform: translateY(0); opacity: 1; }
+    .close-btn { background: none; border: none; font-size: 1.2rem; color: #ccc; cursor: pointer; float: right; }
+  
+    /* Blue-accent highlights */
+    a:hover { color: var(--primary); }
+    button#open-modal, button, .tag.active, #scroll-top {
+      background-color: var(--primary) !important;
+      color: #ffffff !important;
     }
-    .modal button {
-      padding: 10px 20px;
-      margin-top: 12px;
-      background: #ffaa00;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
+    button:hover, .tag:hover {
+      background-color: rgba(24,119,242,0.2) !important;
     }
-    .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      color: #ccc;
-      float: right;
-      cursor: pointer;
+    .vote-btn:first-child, .vote-btn:last-child {
+      color: var(--primary);
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="topbar">
-    <div class="left-section">
-      <div class="menu-icon">☰</div>
-      <div class="sidebar">
-        <strong>Settings</strong>
-        <label><input type="checkbox" /> Dark Mode</label>
-        <label><input type="checkbox" /> Compact View</label>
-        <label><input type="checkbox" /> Enable Sound</label>
-      </div>
-      <div>Democratize Info</div>
+    <div class="menu-icon">☰</div>
+    <div class="sidebar">
+      <label><input type="checkbox" id="dark-toggle"> Dark Mode</label>
+      <label><input type="checkbox" id="compact-toggle"> Compact View</label>
+      <label><input type="checkbox" /> Enable Sound</label>
     </div>
-    <div class="center-section">
-      <input type="text" placeholder="Search..." />
+    <div class="center-controls">
+      <input type="text" id="search-input" placeholder="Search posts...">
       <div class="tag" data-tag="world">world</div>
       <div class="tag" data-tag="tech">tech</div>
       <div class="tag" data-tag="science">science</div>
       <div class="tag" data-tag="culture">culture</div>
+      <select id="sort-posts"><option value="newest">Newest</option><option value="top">Top</option></select>
     </div>
-    <div class="right-section">
-      <button id="open-modal" class="donate">New Post</button>
-      <button class="donate">Donate</button>
-      <button class="login">Login</button>
+    <div>
+      <button id="open-modal"> New Post </button>
+      <button> Donate </button>
+      <button> Login </button>
       <div class="user-icon"></div>
     </div>
   </div>
+  <div class="layout">
+    <div class="left-column"></div>
+    <div class="center-column">
+      <div class="feed" id="feed">
+        <div class="post" data-tag="tech" data-timestamp="202506091700">
+          <img src="https://picsum.photos/seed/379/120" alt="AI Advances in 2025">
+          <div class="post-content">
+            <div class="post-title">AI Advances in 2025</div>
+            <div class="post-body">Real-time code generation in the browser is revolutionizing developer workflows.</div>
+            <div class="hashtags">#tech</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>205</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="science" data-timestamp="202506091630">
+          <img src="https://picsum.photos/seed/1170/120" alt="Mars Rover Discovers Water Ice">
+          <div class="post-content">
+            <div class="post-title">Mars Rover Discovers Water Ice</div>
+            <div class="post-body">NASA's Perseverance rover has confirmed water ice deposits beneath the Martian surface.</div>
+            <div class="hashtags">#science</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>297</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="culture" data-timestamp="202506091521">
+          <img src="https://picsum.photos/seed/2238/120" alt="Virtual Art Exhibits Gain Traction">
+          <div class="post-content">
+            <div class="post-title">Virtual Art Exhibits Gain Traction</div>
+            <div class="post-body">VR galleries are showcasing immersive digital art experiences to global audiences.</div>
+            <div class="hashtags">#culture</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>186</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="world" data-timestamp="202506091450">
+          <img src="https://picsum.photos/seed/3106/120" alt="Global Climate Summit 2025">
+          <div class="post-content">
+            <div class="post-title">Global Climate Summit 2025</div>
+            <div class="post-body">World leaders convene to discuss aggressive targets for carbon neutrality.</div>
+            <div class="hashtags">#world</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>161</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="tech" data-timestamp="202506091320">
+          <img src="https://picsum.photos/seed/4406/120" alt="Quantum Computing Breakthrough">
+          <div class="post-content">
+            <div class="post-title">Quantum Computing Breakthrough</div>
+            <div class="post-body">Researchers achieve stable qubit arrays, marking a milestone for quantum processors.</div>
+            <div class="hashtags">#tech</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>139</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="science" data-timestamp="202506091215">
+          <img src="https://picsum.photos/seed/5582/120" alt="Ocean Conservation Initiative">
+          <div class="post-content">
+            <div class="post-title">Ocean Conservation Initiative</div>
+            <div class="post-body">New marine protected areas are established to preserve biodiversity.</div>
+            <div class="hashtags">#science</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>221</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+      </div>
+            <div class="post-body">Recent breakthroughs in generative AI have enabled real-time code generation in the browser, revolutionizing developer workflows.</div>
+            <div class="hashtags">#tech</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>130</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="science" data-timestamp="202506091630">
+          <img src="https://picsum.photos/seed/1862/120" alt="Mars Rover Discovers Water Ice">
+          <div class="post-content">
+            <div class="post-title">Mars Rover Discovers Water Ice</div>
+            <div class="post-body">NASA's Perseverance rover has confirmed deposits of water ice beneath the Martian surface, raising hopes for future colonization.</div>
+            <div class="hashtags">#science</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>221</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div>
+        <div class="post" data-tag="culture" data-timestamp="202506091521">
+          <img src="https://picsum.photos/seed/2340/120" alt="Virtual Art Exhibits Gain Traction">
+          <div class="post-content">
+            <div class="post-title">Virtual Art Exhibits Gain Traction</div>
+            <div class="post-body">With the rise of VR galleries, digital artists are showcasing immersive experiences to global audiences like never before.</div>
+            <div class="hashtags">#culture</div>
+            <div class="post-footer">
+              <div class="votes"><span class="vote-btn">🗳️</span><span>194</span><span class="vote-btn">👎</span></div>
+              <button class="bookmark-btn">🔖</button>
+            </div>
+          </div>
+        </div></div>
+    <div class="right-column"></div>
+  </div>
+  <button id="scroll-top">↑</button>
 
   <div class="modal-bg" id="modal-bg">
     <div class="modal">
       <button class="close-btn" id="close-modal">×</button>
       <h3>Submit a Post</h3>
-      <input type="text" id="post-title" placeholder="Title" />
-      <textarea id="post-body" rows="4" placeholder="Body or description"></textarea>
-      <input type="url" id="post-img" placeholder="Image URL (optional)" />
+      <input type="text" id="post-title" placeholder="Title">
+      <textarea id="post-body" rows="4" placeholder="Body"></textarea>
+      <input type="url" id="post-img" placeholder="Image URL (optional)">
       <select id="post-tag">
         <option value="">Select Tag...</option>
-        <option>world</option>
-        <option>tech</option>
-        <option>science</option>
-        <option>culture</option>
+        <option>world</option><option>tech</option><option>science</option><option>culture</option>
       </select>
       <button id="submit-post">Post</button>
     </div>
   </div>
 
-  <div class="layout">
-    <div class="left-column"></div>
-    <div class="center-column">
-      <div class="feed" id="feed">
-  <div class="post" data-post-id="post-1" data-tag="tech">
-    <div class="post-header">
-      <div class="post-meta">u/synthwave42 • 1h ago • <span class="flair">tech</span></div>
-    </div>
-    <div class="post-title">NVIDIA Unveils Next-Gen AI Chips</div>
-    <div class="post-body">New silicon from NVIDIA promises 3x the performance for training large language models, pushing the frontier once again.</div>
-    <div class="post-footer">
-      <div class="votes">
-        <span class="vote-btn">⬆</span>
-        <span>842</span>
-        <span class="vote-btn">⬇</span>
-      </div>
-      <button class="bookmark-btn">🔖 Save</button>
-      <div class="post-meta">122 comments</div>
-    </div>
-  </div>
-
-  <div class="post" data-post-id="post-2" data-tag="world">
-    <div class="post-header">
-      <div class="post-meta">u/nomadreport • 3h ago • <span class="flair">world</span></div>
-    </div>
-    <div class="post-title">Election Shocks Eastern Europe</div>
-    <div class="post-body">A surprise upset in Hungary has set the political landscape ablaze. Voters turned out in record numbers.</div>
-    <div class="post-footer">
-      <div class="votes">
-        <span class="vote-btn">⬆</span>
-        <span>650</span>
-        <span class="vote-btn">⬇</span>
-      </div>
-      <button class="bookmark-btn">🔖 Save</button>
-      <div class="post-meta">87 comments</div>
-    </div>
-  </div>
-
-  <div class="post" data-post-id="post-3" data-tag="science">
-    <div class="post-header">
-      <div class="post-meta">u/astrobyte • 6h ago • <span class="flair">science</span></div>
-    </div>
-    <div class="post-title">James Webb Detects Possible Biosignature</div>
-    <div class="post-body">The James Webb Space Telescope may have detected dimethyl sulfide on an exoplanet — a chemical linked to microbial life on Earth.</div>
-    <div class="post-footer">
-      <div class="votes">
-        <span class="vote-btn">⬆</span>
-        <span>1.1k</span>
-        <span class="vote-btn">⬇</span>
-      </div>
-      <button class="bookmark-btn">🔖 Save</button>
-      <div class="post-meta">231 comments</div>
-    </div>
-  </div>
-
-  <div class="post" data-post-id="post-4" data-tag="culture">
-    <div class="post-header">
-      <div class="post-meta">u/filmjunkie • 9h ago • <span class="flair">culture</span></div>
-    </div>
-    <div class="post-title">Indie Film Wins Top Prize at Cannes</div>
-    <div class="post-body">"Refraction," a quiet film about grief and memory, just took the Palme d'Or and critics are raving about its cinematography.</div>
-    <div class="post-footer">
-      <div class="votes">
-        <span class="vote-btn">⬆</span>
-        <span>489</span>
-        <span class="vote-btn">⬇</span>
-      </div>
-      <button class="bookmark-btn">🔖 Save</button>
-      <div class="post-meta">53 comments</div>
-    </div>
-  </div>
-
-  <div class="post" data-post-id="post-5" data-tag="tech">
-    <div class="post-header">
-      <div class="post-meta">u/cybernaut • 12h ago • <span class="flair">tech</span></div>
-    </div>
-    <div class="post-title">The Rise of Edge AI: Processing Without the Cloud</div>
-    <div class="post-body">Edge computing is exploding. From smartphones to satellites, intelligent decision-making is moving offline for privacy and speed.</div>
-    <div class="post-footer">
-      <div class="votes">
-        <span class="vote-btn">⬆</span>
-        <span>720</span>
-        <span class="vote-btn">⬇</span>
-      </div>
-      <button class="bookmark-btn">🔖 Save</button>
-      <div class="post-meta">98 comments</div>
-    </div>
-  </div>
-</div>
-    </div>
-    <div class="right-column"></div>
-  </div>
-
   <script>
+    const menuIcon = document.querySelector('.menu-icon');
+    const sidebar = document.querySelector('.sidebar');
+    menuIcon.onclick = () => sidebar.classList.toggle('open');
+
+    const darkToggle = document.getElementById('dark-toggle');
+    darkToggle.onchange = () => document.body.classList.toggle('light-mode');
+
+    // Search, filter, sort
+    const searchInput = document.getElementById('search-input');
+    const tags = document.querySelectorAll('.tag');
+    const sortSelect = document.getElementById('sort-posts');
+    const feed = document.getElementById('feed');
+
+    function filterPosts() {
+      const query = searchInput.value.toLowerCase();
+      const activeTag = document.querySelector('.tag.active')?.dataset.tag;
+      Array.from(feed.children)
+        .filter(el => el.classList.contains('post'))
+        .forEach(post => {
+          const title = post.querySelector('.post-title').textContent.toLowerCase();
+          const body = post.querySelector('.post-body').textContent.toLowerCase();
+          const matchesSearch = title.includes(query) || body.includes(query);
+          const matchesTag = !activeTag || post.dataset.tag === activeTag;
+          post.style.display = (matchesSearch && matchesTag) ? 'flex' : 'none';
+        });
+    }
+    searchInput.oninput = filterPosts;
+    tags.forEach(tagEl => {
+      tagEl.onclick = () => {
+        const isActive = tagEl.classList.toggle('active');
+        tags.forEach(t => { if (t !== tagEl) t.classList.remove('active'); });
+        filterPosts();
+      }
+    });
+    sortSelect.onchange = () => {
+      const posts = Array.from(feed.children).filter(el => el.classList.contains('post'));
+      posts.sort((a,b) => {
+        if (sortSelect.value === 'newest') {
+          return parseInt(b.dataset.timestamp) - parseInt(a.dataset.timestamp);
+        } else {
+          return parseInt(b.querySelector('.votes span:nth-child(2)').textContent) -
+                 parseInt(a.querySelector('.votes span:nth-child(2)').textContent);
+        }
+      });
+      posts.forEach(p => feed.appendChild(p));
+    };
+
+    // Modal
     const modalBg = document.getElementById('modal-bg');
     const openBtn = document.getElementById('open-modal');
     const closeBtn = document.getElementById('close-modal');
-    const submitBtn = document.getElementById('submit-post');
-    const feed = document.getElementById('feed');
-    const tags = document.querySelectorAll('.tag');
-    let idCounter = 1;
+    openBtn.onclick = () => {
+      modalBg.classList.add('open');
+      setTimeout(() => document.getElementById('post-title').focus(), 100);
+    };
+    closeBtn.onclick = () => modalBg.classList.remove('open');
 
-    openBtn.onclick = () => modalBg.style.display = 'flex';
-    closeBtn.onclick = () => modalBg.style.display = 'none';
-
-    submitBtn.onclick = () => {
+    document.getElementById('submit-post').onclick = () => {
       const title = document.getElementById('post-title').value.trim();
       const body = document.getElementById('post-body').value.trim();
       const img = document.getElementById('post-img').value.trim();
       const tag = document.getElementById('post-tag').value.trim();
       if (!title || !body) return alert('Title and body required.');
-
       const postEl = document.createElement('div');
       postEl.className = 'post';
-      postEl.dataset.postId = 'post-' + idCounter++;
       postEl.dataset.tag = tag;
+      postEl.dataset.timestamp = new Date().toISOString().replace(/[-:TZ.]/g,'').slice(0,12);
       postEl.innerHTML = `
-        <div class="post-header">
-          <div class="post-meta">u/you • just now • <span class="flair">${tag}</span></div>
-        </div>
-        <div class="post-title">${title}</div>
-        ${ img ? `<img src="${img}" alt="user image">` : '' }
-        <div class="post-body">${body}</div>
-        <div class="post-footer">
-          <div class="votes">
-            <span class="vote-btn">⬆</span>
-            <span>0</span>
-            <span class="vote-btn">⬇</span>
+        <img src="${img||''}" alt="image">
+        <div class="post-content">
+          <div class="post-title">${title}</div>
+          <div class="post-body">${body}</div>
+          <div class="hashtags">#${tag}</div>
+          <div class="post-footer">
+            <div class="votes"><span class="vote-btn">🗳️</span><span>0</span><span class="vote-btn">👎</span></div>
+            <button class="bookmark-btn">🔖</button>
           </div>
-          <button class="bookmark-btn">🔖 Save</button>
-          <div class="post-meta">0 comments</div>
         </div>
       `;
       feed.prepend(postEl);
-      modalBg.style.display = 'none';
-      document.getElementById('post-title').value = '';
-      document.getElementById('post-body').value = '';
-      document.getElementById('post-img').value = '';
-      document.getElementById('post-tag').value = '';
+      modalBg.classList.remove('open');
+      document.querySelectorAll('#modal-bg input, #modal-bg textarea, #modal-bg select').forEach(el => el.value = '');
     };
 
-    tags.forEach(tagEl => {
-      tagEl.addEventListener('click', () => {
-        const selected = tagEl.classList.contains('active') ? null : tagEl.dataset.tag;
-        tags.forEach(t => t.classList.remove('active'));
-        if (selected) tagEl.classList.add('active');
-        document.querySelectorAll('.post').forEach(post => {
-          post.style.display = (!selected || post.dataset.tag === selected) ? 'flex' : 'none';
-        });
-      });
-    });
-  </script>
+    // Scroll to top
+    const scrollTopBtn = document.getElementById('scroll-top');
+    window.onscroll = () => {
+      scrollTopBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+    };
+    scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+// --- Infinite Scroll: clone first two posts when near bottom ---
+let loading = false;
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+    loading = true;
+    setTimeout(() => {
+      const visiblePosts = Array.from(feed.children).filter(c => c.classList.contains('post'));
+      visiblePosts.slice(0, 2).forEach(p => feed.appendChild(p.cloneNode(true)));
+      loading = false;
+    }, 500);
+  }
+});
+
+// --- Keyboard Navigation: use j/k to navigate posts ---
+let currentIndex = -1;
+const getPosts = () => Array.from(feed.querySelectorAll('.post'));
+document.addEventListener('keydown', e => {
+  if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+    const postsArr = getPosts();
+    if (e.key === 'j' || e.key === 'k') {
+      if (postsArr.length === 0) return;
+      // Remove previous selection
+      if (currentIndex >= 0 && postsArr[currentIndex]) {
+        postsArr[currentIndex].classList.remove('selected');
+      }
+      currentIndex = e.key === 'j'
+        ? Math.min(postsArr.length - 1, currentIndex + 1)
+        : Math.max(0, currentIndex - 1);
+      const current = postsArr[currentIndex];
+      current.classList.add('selected');
+      current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+});
+
+// --- Tooltip on images for accessibility ---
+document.querySelectorAll('.post img').forEach(img => {
+  img.title = img.alt || 'Post image';
+});
+
+// --- Confetti effect on new post submission ---
+function launchConfetti() {
+  const confetti = document.createElement('div');
+  confetti.className = 'confetti';
+  confetti.textContent = '🎉';
+  confetti.style.position = 'fixed';
+  confetti.style.left = Math.random() * 100 + 'vw';
+  confetti.style.top = '-2rem';
+  confetti.style.fontSize = Math.random() * 1 + 1 + 'rem';
+  document.body.appendChild(confetti);
+  confetti.animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(100vh)' }
+  ], { duration: 2000 });
+  setTimeout(() => confetti.remove(), 2000);
+}
+document.getElementById('submit-post').addEventListener('click', launchConfetti);
+
+// --- Add CSS for selected posts and confetti ---
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  .post.selected {
+    box-shadow: 0 0 10px var(--primary);
+    transform: scale(1.02);
+  }
+  .confetti {
+    pointer-events: none;
+    z-index: 999;
+  }
+`;
+document.head.appendChild(styleTag);
+</script>
 </body>
 </html>
